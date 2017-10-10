@@ -10,4 +10,6 @@ get 'pictures/:id/edit' => "pictures#edit"
 patch 'pictures/:id' => "pictures#update"
 
 get 'pictures/:id' => 'pictures#show'
+
+delete 'pictures/:id' => 'pictures#destroy'
 end

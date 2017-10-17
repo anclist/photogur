@@ -1,12 +1,17 @@
 <h1>All Pictures</h1>
 
 <% @pictures.each do |picture| %>
-  <p><%= link_to(picture.title, "/pictures/#{picture.id}") %>, <%= picture.artist %></p>
+  <p><%= link_to(picture.title, "/pictures/#{picture.id}") %>, <%= picture.artist %> <%= picture.created_at.year %></p>
 <% end %>
 
 
 <h1>There are <%= @older_pictures.count %> pictures older than a month</h1>
 
 <% @older_pictures.each do |picture| %>
-  <p> <%= link_to(picture.title, "/pictures/#{picture.id}") %>, <%= picture.artist %> </p>
+  <p> <%= link_to(picture.title, "/pictures/#{picture.id}") %>, <%= picture.artist %> <%= picture.created_at.year %> </p>
+<% end %>
+
+
+<% @pictures_by_year.each do |year| %>
+  <%= year %>
 <% end %>

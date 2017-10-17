@@ -14,9 +14,12 @@ class Picture < ApplicationRecord
   end
 
   def self.pictures_created_in_year
-    test = Picture.group("strftime('%Y', created_at)")
+    Picture.uniq.pluck("strftime('%Y', created_at)")
+    # Picture.group("strftime('%Y', created_at)")
+    # Picture.group("year(created_at)")
     # byebug
-    test
+    # Picture.where("created_at >= ?", "#{year}-01-01 01:01:01").where("created_at <= ?", "#{year}-12-31 23:59:59")
+
   end
 
 

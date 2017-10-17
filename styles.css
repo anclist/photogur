@@ -1,0 +1,275 @@
+/* BASE styles */
+
+html {
+  box-sizing: border-box;
+  font-family: "Source Sans Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 100%;
+  color: #333333;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+
+  /*
+    We need to add some padding to the bottom of the body on mobile so that
+     the footer won't get covered by our navigation
+  */
+  padding-bottom: 60px;
+}
+
+/*
+  This rule ensure that all images always fit in their container
+   but are never stretched beyond their native resolution
+*/
+img {
+  max-width: 100%;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+
+
+/* CLEARFIX - for ensuring floated elements are contained in their parent */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+
+/* NAVIGATION styles */
+.site-logo {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: 80px;
+  height: 80px;
+  margin: 0;
+  z-index: 100;
+}
+
+.site-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #ffffff;
+}
+
+.site-nav-list,
+.footer-nav-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.site-nav-item {
+  float: left;
+  width: 20%;
+  height: 60px;
+  padding: 0.75em;
+  font-family: "Montserrat", "Source Code Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.6em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.site-nav-item > .fa {
+  font-size: 1.75rem;
+}
+
+.site-nav-item:hover {
+  background-color: #333333;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.site-nav-item-label {
+  display: block;
+  margin-top: 0.5em;
+}
+
+
+/* MOVIE styles */
+.movie {
+  position: relative;
+}
+
+.movie-poster,
+.movie-backdrop {
+  display: block;
+}
+
+/*
+  Hide the poster on mobile devices, only show backdrop
+  TIP: Use media queries to reveal it on larger devices
+*/
+.movie-poster {
+  display: none;
+}
+
+.movie-details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 1em;
+  color: #ffffff;
+
+  /*
+    Linear gradients are a bit of an advanced CSS3 feature.
+      As seen below you specify the linear-gradient as a value for
+      the `background-image` property. It creates a gradient with as many stops
+      as you care to define. To learn more about how it works, read this article
+      and the related docs: https://medium.com/@patrickbrosset/do-you-really-understand-css-linear-gradients-631d9a895caf#.6yl8vdmiv
+  */
+
+  background-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/*
+  Hide the overview on mobile devices
+  TIP: Use media queries to reveal it on larger devices
+*/
+.movie-overview {
+  display: none;
+}
+
+.movie-title-label {
+  font-family: "Montserrat", "Source Code Pro", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.7em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: gold;
+  margin: 0;
+}
+
+.movie-title {
+  margin: 0;
+  font-size: 2em;
+  line-height: 1.1;
+}
+
+
+/* FOOTER styles */
+.site-footer {
+  text-align: center;
+}
+
+.footer-nav {
+  padding: 1em;
+}
+
+.footer-nav-item {
+  display: inline-block;
+  margin-right: 0.5em;
+}
+
+/*
+  The :last-child pseudo-selector lets you select only the last element
+    within a containing element. Similarly, there's a :first-child pseudo-selector
+    to select the first child of a containing element.
+*/
+.footer-nav-item:last-child {
+  margin-right: 0;
+}
+
+
+.about {
+  background-color: #333333;
+  color: #ffffff;
+  padding: 1em;
+}
+
+.about > p {
+  margin: 0;
+}
+
+
+/* MEDIA QUERYS*/
+
+
+
+/*  FOR TABLETS */
+
+@media ( min-width: 768px) {
+  body {
+    padding-left: 68.875px;
+    padding-bottom: 0;
+  }
+
+  .site-nav-item {
+    float: none;
+    width: 100%;
+  }
+  .site-nav {
+    right: auto;
+    width: auto;
+    top: 0;
+    padding-top: 5rem;
+    z-index: 99;
+  }
+  .site-logo {
+    top: 0.7rem;
+    left: 0.7rem;
+    width: 50px;
+    height: 50px;
+  }
+  .movie-overview {
+    display: inline-block;
+  }
+  .footer-nav {
+      float: left;
+      width: 50%;
+  }
+  .about {
+      float: right;
+      width: 50%;
+  }
+  }
+
+
+  /* FOR DESKTOPS */
+
+  @media ( min-width: 992px) {
+    .movie-backdrop {
+      display: none;
+    }
+    .movie:first-child .movie-backdrop {
+      display: block;
+    }
+    .movie:first-child .movie-poster {
+      display: none;
+    }
+    .movie-poster {
+      display: block;
+    }
+    .movie-overview {
+      display: none;
+    }
+    .movie:first-child .movie-overview {
+      display: block;
+    }
+    .movie {
+      width: 33%;
+      float: left;
+    }
+    .movie:first-child {
+      width: 100%;
+    }
+    main {
+      overflow: hidden;
+    }
+
+  }

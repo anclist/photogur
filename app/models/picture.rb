@@ -3,7 +3,7 @@ class Picture < ApplicationRecord
 validates :artist, :title, :url, presence: true
 validates :title, length: { in: 3..20 }
 validates :url, uniqueness: true
-validates :url, format: URI::regexp(%w(http https))
+
 
 
   def self.newest_first
@@ -20,12 +20,17 @@ validates :url, format: URI::regexp(%w(http https))
   end
 
   def self.pictures_created_in_year
-    Picture.uniq.pluck("strftime('%Y', created_at)")
+    years = find_the_year
     # Picture.group("strftime('%Y', created_at)")
     # Picture.group("year(created_at)")
-    # byebug
-    # Picture.where("created_at >= ?", "#{year}-01-01 01:01:01").where("created_at <= ?", "#{year}-12-31 23:59:59")
+    years.each do |year|
+      pictures = Picture.where("created_at >= ?", "#{year}-01-01 01:01:01").where("created_at <= ?", "#{year}-12-31 23:59:59")
+      # byebug
+    end
+  end
 
+  def self.find_the_year
+    Picture.uniq.pluck("strftime('%Y', created_at)")
   end
 
 

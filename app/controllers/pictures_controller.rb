@@ -2,6 +2,7 @@ class PicturesController < ApplicationController
   def index
     @pictures =Picture.newest_first
     @older_pictures = Picture.created_before
+    @show_year = Picture.find_the_year
     @pictures_by_year = Picture.pictures_created_in_year
   end
 

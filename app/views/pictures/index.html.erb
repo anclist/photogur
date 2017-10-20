@@ -1,5 +1,5 @@
 <h1>Photogur</h1>
-<p><%= link_to("New Picture", pictures_new_path) %></p>
+<p><%= link_to("New Picture", new_picture_path) %></p>
 
 <% @pictures.each do |picture| %>
   <div class="img-container">
@@ -9,7 +9,7 @@
 <% end %>
 
 
-<h1>There are <%= @older_pictures.count %> pictures older than a month</h1>
+<!-- <h1>There are <%= @older_pictures.count %> pictures older than a month</h1>
 
 <% @older_pictures.each do |picture| %>
   <p> <%= link_to(picture.title, "/pictures/#{picture.id}") %>, <%= picture.artist %> <%= picture.created_at.year %> </p>
@@ -18,4 +18,4 @@
 
 <% @show_year.each do |year| %>
   <%= year %>
-<% end %>
+<% end %> -->

@@ -7,7 +7,10 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+
+
     <p class="userinfo">
+      <%= link_to('Home', root_path) %> <br>
       <% if current_user %>
       Signed in as <%= current_user.email %>. <%= link_to "Log out", session_path("current"), :method => :delete %>
       <% else %>

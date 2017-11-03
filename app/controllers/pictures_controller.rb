@@ -36,7 +36,7 @@ class PicturesController < ApplicationController
 
     if @picture.save
       flash[:notice] = "You have succesfully updated your picture"
-      redirect_to picture(params[:id])
+      redirect_to picture_path(params[:id])
     else
       flash[:alert] = "Please fix errors before updating your picture"
       render :edit

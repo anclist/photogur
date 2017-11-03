@@ -1,13 +1,14 @@
 class PicturesController < ApplicationController
 
   before_action :ensure_logged_in, except: [:show, :index]
+  before_action :load_picture, only: [:show, :edit, :update, :destroy]
+  before_action :ensure_user_owns_picture, only: [:edit, :update, :destroy]
 
   def index
     @pictures =Picture.newest_first
   end
 
   def show
-    @picture = Picture.find(params[:id])
   end
 
   def new
@@ -27,12 +28,9 @@ class PicturesController < ApplicationController
   end
 
   def edit
-    @picture = Picture.find(params[:id])
   end
 
   def update
-    @picture = Picture.find(params[:id])
-
     @picture.update(picture_params)
 
 
@@ -46,7 +44,6 @@ class PicturesController < ApplicationController
   end
 
   def destroy
-    @picture = Picture.find(params[:id])
     @picture.destroy
     redirect_to pictures_path
   end
@@ -54,7 +51,22 @@ class PicturesController < ApplicationController
   private
 
   def picture_params
-    return params.require(:picture).permit(:artist, :title, :image)
+    return params.require(:picture).permit(:artist, :title, :image, :user)
   end
+
+  def load_picture
+    @picture = Picture.find(params[:id])
+  end
+
+  def ensure_user_owns_picture
+    #code
+  end
+
+  def ensure_user_owns_picture
+  unless current_user == @picture.user
+    flash[:alert] = "You can't modify this picture"
+    redirect_to pictures_path
+  end
+end
 
 end

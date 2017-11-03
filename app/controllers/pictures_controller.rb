@@ -1,12 +1,12 @@
 class PicturesController < ApplicationController
 
-  before_action :ensure_logged_in, except: [:show, :index]
+  # before_action :ensure_logged_in, except: [:show, :index]
 
   def index
-    @pictures =Picture.newest_first
-    @older_pictures = Picture.created_before
-    @show_year = Picture.find_the_year
-    @pictures_by_year = Picture.pictures_created_in_year
+    @pictures =Picture.all
+    # @older_pictures = Picture.created_before
+    # # @show_year = Picture.find_the_year
+    # @pictures_by_year = Picture.pictures_created_in_year
   end
 
   def show
@@ -18,10 +18,11 @@ class PicturesController < ApplicationController
   end
 
   def create
-    @picture = Picture.new
-     @picture.title = params[:picture][:title]
-    @picture.artist = params[:picture][:artist]
-    @picture.url = params[:picture][:url]
+    @picture = Picture.new( picture_params )
+
+    # @picture.artist = params[:picture][:artist]
+    # @picture.title = params[:picture][:title]
+    # @picture.image = params[:picture][:image]
 
 
     if @picture.save
@@ -40,9 +41,7 @@ class PicturesController < ApplicationController
   def update
     @picture = Picture.find(params[:id])
 
-    @picture.title = params[:picture][:title]
-    @picture.artist = params[:picture][:artist]
-    @picture.url = params[:picture][:url]
+    @picture.update(picture_params)
 
 
     if @picture.save
@@ -56,6 +55,12 @@ class PicturesController < ApplicationController
     @picture = Picture.find(params[:id])
     @picture.destroy
     redirect_to "/pictures"
+  end
+
+  private
+
+  def picture_params
+    return params.require(:picture).permit(:artist, :title, :image)
   end
 
 end

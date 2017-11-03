@@ -3,19 +3,7 @@
 
 <% @pictures.each do |picture| %>
   <div class="img-container">
-    <%= link_to(image_tag(picture.url), "/pictures/#{picture.id}") %>
+    <%= image_tag picture.image.url(:medium) %>
   <p><%= link_to(picture.title, "/pictures/#{picture.id}") %>, <%= picture.artist %> <%= picture.created_at.year %></p>
 </div>
 <% end %>
-
-
-<!-- <h1>There are <%= @older_pictures.count %> pictures older than a month</h1>
-
-<% @older_pictures.each do |picture| %>
-  <p> <%= link_to(picture.title, "/pictures/#{picture.id}") %>, <%= picture.artist %> <%= picture.created_at.year %> </p>
-<% end %>
-
-
-<% @show_year.each do |year| %>
-  <%= year %>
-<% end %> -->

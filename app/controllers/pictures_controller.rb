@@ -1,12 +1,9 @@
 class PicturesController < ApplicationController
 
-  # before_action :ensure_logged_in, except: [:show, :index]
+  before_action :ensure_logged_in, except: [:show, :index]
 
   def index
-    @pictures =Picture.all
-    # @older_pictures = Picture.created_before
-    # # @show_year = Picture.find_the_year
-    # @pictures_by_year = Picture.pictures_created_in_year
+    @pictures =Picture.newest_first
   end
 
   def show
@@ -18,18 +15,13 @@ class PicturesController < ApplicationController
   end
 
   def create
-    @picture = Picture.new( picture_params )
-
-    # @picture.artist = params[:picture][:artist]
-    # @picture.title = params[:picture][:title]
-    # @picture.image = params[:picture][:image]
-
+    @picture = Picture.new(picture_params)
 
     if @picture.save
-      # if the picture gets saved, generate a get request to "/pictures" (the index)
-      redirect_to "/pictures"
+      flash[:notice] = "You have succesfully uploaded your picture"
+      redirect_to pictures_path
     else
-      # otherwise render new.html.erb
+      flash[:alert] = "Please fix errors before uploading your picture"
       render :new
     end
   end
@@ -45,8 +37,10 @@ class PicturesController < ApplicationController
 
 
     if @picture.save
-      redirect_to "/pictures/#{@picture.id}"
+      flash[:notice] = "You have succesfully updated your picture"
+      redirect_to picture(params[:id])
     else
+      flash[:alert] = "Please fix errors before updating your picture"
       render :edit
     end
   end
@@ -54,7 +48,7 @@ class PicturesController < ApplicationController
   def destroy
     @picture = Picture.find(params[:id])
     @picture.destroy
-    redirect_to "/pictures"
+    redirect_to pictures_path
   end
 
   private

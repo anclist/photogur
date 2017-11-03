@@ -2,8 +2,8 @@
 <p><%= link_to("New Picture", new_picture_path) %></p>
 
 <% @pictures.each do |picture| %>
-  <div class="img-container">
-    <%= image_tag picture.image.url(:medium) %>
-  <p><%= link_to(picture.title, "/pictures/#{picture.id}") %>, <%= picture.artist %> <%= picture.created_at.year %></p>
+<div class="img-container">
+  <%= link_to(image_tag(picture.image.url(:medium)), picture_path(picture.id)) %>
+  <p><%= link_to(picture.title, picture_path(picture.id)) %>, <%= picture.artist %> <%= picture.created_at.year %></p>
 </div>
 <% end %>

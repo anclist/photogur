@@ -10,11 +10,11 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_logged_in
-  unless current_user
-    flash[:alert] = "You must log in first"
-    redirect_to new_session_url
+    unless current_user
+      flash[:alert] = "You must log in first"
+      redirect_to new_session_url
+    end
   end
-end
 
   helper_method :current_user
 
